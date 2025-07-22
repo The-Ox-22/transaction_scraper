@@ -29,18 +29,26 @@ def login_to_bofa(driver: webdriver.Chrome, username: str, passcode: str):
     driver.find_element(By.ID, "passcode1").send_keys(passcode)
     driver.find_element(By.ID, "signIn").submit()
 
-    if driver.current_url == "https://secure.bankofamerica.com/login/sign-in/signOnSuccessRedirect.go":
-        driver.find_element(By.ID, "btnARContinue").click()
-        driver.find_element(By.CLASS_NAME, "authcode").send_keys(input())
-        driver.find_element(By.ID, "yes-recognize").click()
-        driver.find_element(By.ID, "continue-auth-number").click()
+# https://secure.bankofamerica.com/login/sign-in/signOnSuccessRedirect.go
+    # if driver.current_url == "https://secure.bankofamerica.com/login/sign-in/signOnSuccessRedirect.go":
+    #     print("Hit 2FA")
+    #     driver.find_element(By.ID, "btnARContinue").click()
+    #     twofa = input("Please input the 2FA code: ")
+    #     driver.find_element(By.CLASS_NAME, "authcode").send_keys(twofa)
+    #     # driver.find_element(By.ID, "yes-recognize").click()
+    #     driver.find_element(By.ID, "continue-auth-number").click()
+    # TODO: since this doesn't seem to work... maybe I can just enter it on the site and wait here
+    # twofa = input("Please input the 2FA code: ")
+    # driver.find_element(By.ID, "tlpvt-xsw-authnum").send_keys(twofa)
+    # driver.find_element(By.ID, "continue-auth-number").click()
 
-    if driver.current_url.startswith('https://secure.bankofamerica.com/myaccounts/'):
-        print("Succeeded Logging in")
-        return True
-    else:
-        print("Failed Logging in")
-        return False
+    # if driver.current_url.startswith('https://secure.bankofamerica.com/myaccounts/'):
+    #     print("Succeeded Logging in")
+    #     return True
+    # else:
+    #     print("Failed Logging in")
+    #     return False
+    return True
 
 def goto_prev_transactions(driver: webdriver.Chrome) -> bool:
     for el in driver.find_elements(By.TAG_NAME, "a"):
